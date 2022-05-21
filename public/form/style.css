@@ -1,0 +1,26 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html ,body{
+    height: 100%;
+    width: 100%;
+}
+
+#subject>div>table{
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+}
+#subject>div>table th,
+#subject>div>table td{
+    border: solid rgb(200, 200, 200) 1px;
+    text-align: center;
+    text-align-last: center;
+
+}
+#subject>div>table tr:nth-child(even){
+    background-color: rgb(50, 50, 50);
+    color: white;
+}

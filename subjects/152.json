@@ -1,0 +1,19 @@
+{
+  "subjects": [
+    {
+      "name": "Web Tech",
+      "code": "1",
+      "type": "Theory"
+    },
+    {
+      "name": "Cloud Comp",
+      "code": "2",
+      "type": "Theory"
+    },
+    {
+      "name": "Data Science",
+      "code": "3",
+      "type": "Theory"
+    }
+  ]  
+}
