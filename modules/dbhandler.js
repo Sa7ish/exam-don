@@ -1,62 +1,61 @@
-const sql = require('sqlite3'); let db; function test(){return "Wroking";}
+const sql = require('sqlite3');
+let db;
 
-function setDB(value){
+function test() { return "Wroking"; }
+
+function setDB(value) {
     db = new sql.Database(value);
 }
 
 
-function create(data){
-	return new Promise((resolve, reject)=>{
-        db.run(`insert into stud(top, sem, branch, nocollg, prn, fname, gname, mname, address, mail, cno, dob, gender, category, religion, diffabl, nation, subjects, photo, username, password) values("${data.top}", "${data.sem}", "${data.branch}", "${data.nocollg}", "${data.prn}", "${data.fname}", "${data.gname}", "${data.mname}", "${data.address}", "${data.mail}", "${data.cno}", "${data.dob}", "${data.gender}", "${data.category}", "${data.religion}", "${data.diffabl}", "${data.nation}", "/subject/${data.prn}.json", "/photo/${data.prn}.jpg", "${data.username}", "${data.password}")`, 
-        (err) => { 
-            if(err !== null) { reject(err) }
-            else{
-                resolve('profile saved');
-            }
-        });
+function create(data) {
+    return new Promise((resolve, reject) => {
+        db.run(`insert into stud(top, sem, branch, nocollg, prn, fname, gname, mname, address, mail, cno, dob, gender, category, religion, diffabl, nation, subjects, photo, username, password, type) values("${data.top}", "${data.sem}", "${data.branch}", "${data.nocollg}", "${data.prn}", "${data.fname}", "${data.gname}", "${data.mname}", "${data.address}", "${data.mail}", "${data.cno}", "${data.dob}", "${data.gender}", "${data.category}", "${data.religion}", "${data.diffabl}", "${data.nation}", "/subject/${data.prn}.json", "/photo/${data.prn}.jpg", "${data.username}", "${data.password}", "${data.type}")`,
+            (err) => {
+                if (err !== null) { reject(err) } else {
+                    resolve('profile saved');
+                }
+            });
     });
-       
+
 }
 
-function read(username){
+function read(username) {
     // select * from stud where username='john' and password='john@123';
     return new Promise((resolve, reject) => {
         db.all(`select * from stud where username="${username}"`, (err, entries) => {
-            if(err){
+            if (err) {
                 reject(err);
-            }
-            else{
+            } else {
                 resolve(entries);
             }
         });
     });
 }
 
-function validate(username, password){
+function validate(username, password) {
     // select * from stud where username='john' and password='john@123';
     return new Promise((resolve, reject) => {
         db.all(`select * from stud where username="${username}" and password="${password}"`, (err, entries) => {
-            if(err){
+            if (err) {
                 reject(err);
-            }
-            else{
+            } else {
                 console.log('returned entries: ', entries.length);
-                if(entries.length === 0){
+                if (entries.length === 0) {
                     reject(false);
-                }
-                else{
-                    resolve(true);
+                } else {
+                    resolve(entries[0].type);
                 }
             }
         });
     });
 }
 
-function update(prn, header, value){
+function update(prn, header, value) {
 
 }
 
-function remove(prn){
+function remove(prn) {
 
 }
 
