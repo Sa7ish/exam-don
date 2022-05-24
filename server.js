@@ -58,7 +58,7 @@ app.post('/', auth, (req, res) => {
         .then((value) => {
             if (value) {
                 console.log('Your data has been saved successfully');
-                res.send(true);
+                res.send('OK');
             }
         })
         .catch((err) => {

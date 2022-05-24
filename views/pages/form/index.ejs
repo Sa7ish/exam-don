@@ -272,6 +272,7 @@
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.response === 'OK') {
 
+                        console.log('received ok from server');
                         onSaveSuccess();
                     }
 
