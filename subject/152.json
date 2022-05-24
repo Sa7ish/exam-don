@@ -1,7 +1,7 @@
 {
   "subjects": [
     {
-      "name": "Web Tech",
+      "name": "Web Technology",
       "code": "1",
       "type": "Theory"
     },
@@ -13,6 +13,11 @@
     {
       "name": "Data Science",
       "code": "3",
+      "type": "Theory"
+    },
+    {
+      "name": "Web Technology",
+      "code": "1",
       "type": "Theory"
     }
   ]  

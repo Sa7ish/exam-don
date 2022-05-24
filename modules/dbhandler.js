@@ -33,6 +33,18 @@ function read(username) {
     });
 }
 
+function readAll() {
+    return new Promise((resolve, reject) => {
+        db.all(`select * from stud`, (err, entries) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(entries);
+            }
+        });
+    });
+}
+
 function validate(username, password) {
     // select * from stud where username='john' and password='john@123';
     return new Promise((resolve, reject) => {
@@ -51,7 +63,30 @@ function validate(username, password) {
     });
 }
 
-function update(prn, header, value) {
+function updateStudent(username, value) {
+
+    return new Promise((resolve, reject) => {
+
+        db.all(`select * from stud where username="${username}"`, (err, entries) => {
+            if (err) {
+                reject(err);
+            } else {
+                // console.log('returned entries: ', entries.length);
+                if (entries.length === 0) {
+                    reject(false);
+                } else {
+
+                    db.run(`update stud set top="${value.top}", sem="${value.sem}", branch="${value.branch}", nocollg="${value.nocollg}", fname="${value.fname}", gname="${value.gname}", mname="${value.mname}", address="${value.address}", mail="${value.mail}", cno="${value.cno}", dob="${value.dob}", gender="${value.gender}", category="${value.category}", religion="${value.religion}", diffabl="${value.diffabl}", nation="${value.nation}" where username="${username}"`, (err) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(true);
+                        }
+                    });
+                }
+            }
+        });
+    });
 
 }
 
@@ -59,4 +94,4 @@ function remove(prn) {
 
 }
 
-module.exports = { test, create, read, update, remove, setDB, validate };
+module.exports = { test, create, read, readAll, updateStudent, remove, setDB, validate };

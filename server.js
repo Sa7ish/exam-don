@@ -3,6 +3,8 @@ const express = require('express'),
     session = require('express-session');
 const path = require('path');
 
+app.set('view engine', 'ejs');
+
 app.use(session({ secret: 'jkdsfjksdf', resave: true, saveUninitialized: false, cookie: { maxAge: 1000 * 60 * 60 * 6 } }));
 app.use(express.text());
 
@@ -34,7 +36,34 @@ function auth(req, res, next) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', auth, (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'pages', 'form', 'index.html'));
+    handler.read(req.session.username)
+        .then((entries) => {
+            if (entries.length === 1) {
+                console.log(entries[0]);
+                const subjects = JSON.parse(require('fs').readFileSync(path.join(__dirname + entries[0].subjects)));
+                res.render(path.join('pages', 'form', 'index'), { value: entries[0], subjects: subjects.subjects });
+            } else {
+                res.sendStatus(501);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+app.post('/', auth, (req, res) => {
+
+    const payload = JSON.parse(req.body);
+    handler.updateStudent(req.session.username, payload)
+        .then((value) => {
+            if (value) {
+                console.log('Your data has been saved successfully');
+                res.send(true);
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 });
 
 app.get('/login', (req, res, next) => {
@@ -103,7 +132,24 @@ function panelAuth(req, res, next) {
 }
 
 app.get('/panel', panelAuth, (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'pages', 'panel', 'index.html'));
+    handler.readAll()
+        .then((entries) => {
+            console.log('---x---x---\n');
+            console.log(entries);
+            console.log('\n---x---x---');
+            let students = [],
+                admins = [];
+            for (let i = 0; i < entries.length; i++) {
+                if (entries[i].type === 'student') {
+                    students.push(entries[i]);
+                } else if (entries[i].type === 'admin') {
+                    admins.push(entries[i]);
+                }
+            }
+
+            res.render(path.join('pages', 'panel', 'index'), { students, admins });
+        })
+        .catch((err) => { console.error(err); })
 });
 
 app.listen(3000, () => {

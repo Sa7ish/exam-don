@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/form/style.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="d-flex flex-column align-items-center px-5">
+        <div class="d-flex align-items-center justify-content-between" id="heading" style="width: 100%;">
+            <div></div>
+            <div class="h1">Exam application form</div>
+            <a href="/logout">
+                <button class="btn btn-success"><i class="fa fa-sign-out me-2" aria-hidden="true"></i>logout</button>
+            </a>
+        </div>
+
+        <div class="" id="info" style="width: 100%;">
+            <h2>Exam Information</h2>
+            <div class="d-flex flex-column flex-md-row ">
+                <div class="d-flex flex-grow-1">
+                    <div class="me-2">
+                        <div class="d-flex flex-column flex-md-row">
+                            <div class="" style="width: 200px;"><b>Type of</b> </div>
+                            <div>
+                                <select id="top-selector">
+                                    <option value="UG" <%=value.top==='UG' ? 'selected' : '' %>>Under-Graduate</option>
+                                    <option value="PG" <%=value.top==='PG' ? 'selected' : '' %>>Post-Graduate</option>
+                                    <option value="PHD" <%=value.top==='PHD' ? 'selected' : '' %>>Phd</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column flex-md-row">
+                            <div style="width: 200px;"><b>Branch</b></div>
+                            <div class="">
+                                <select id="branch-selector">
+                                    <option value="BCA" <%= value.branch ==='BCA' ? 'selected' : '' %> >BCA</option>
+                                    <option value="BCS" <%= value.branch ==='BCS' ? 'selected' : '' %> >BCS</option>
+                                    <option value="BCom" <%= value.branch ==='BCom' ? 'selected' : '' %> >BCom</option>
+                                    <option value="MCA" <%= value.branch ==='MCA' ? 'selected' : '' %> >MCA</option>
+                                    <option value="MCS" <%= value.branch ==='MCS' ? 'selected' : '' %> >MCS</option>
+                                    <option value="MCom" <%= value.branch ==='MCom' ? 'selected' : '' %> >MCom</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column flex-md-row">
+                            <div style="width: 200px;"><b>Semester</b></div>
+                            <div class="">
+                                <select id="sem-selector">
+                                    <option value="1" <%= value.sem === 1 ? 'selected' : '' %> >1</option>
+                                    <option value="2" <%= value.sem === 2 ? 'selected' : '' %> >2</option>
+                                    <option value="3" <%= value.sem === 3 ? 'selected' : '' %> >3</option>
+                                    <option value="4" <%= value.sem === 4 ? 'selected' : '' %> >4</option>
+                                    <option value="5" <%= value.sem === 5 ? 'selected' : '' %> >5</option>
+                                    <option value="6" <%= value.sem === 6 ? 'selected' : '' %> >6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column flex-md-row">
+                            <div style="width: 200px;"><b>College Name</b></div>
+                            <div class="">
+                                <select id="nocollg-selector">
+                                    <option value="MGM" <%= value.nocollg ==='MGM' ? 'selected' : '' %> >MGM</option>
+                                    <option value="NSB" <%= value.nocollg ==='NSB' ? 'selected' : '' %> >NSB</option>
+                                    <option value="PN" <%= value.nocollg ==='PN' ? 'selected' : '' %> >PN</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="bg-dark " style="height: 100px; width:100px;"></div>
+            </div>
+        </div>
+
+        <div class="my-3" id="personal" style="width: 100%;">
+            <h2>Personal Information</h2>
+            <div class="d-flex flex-column flex-md-row ">
+
+                <div class="d-flex flex-column">
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Full Name</b></div>
+                        <div class="form-outline">
+                            <input id="fname-selector" value="<%= value.fname %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Guardian Name</b></div>
+                        <div class="form-outline">
+                            <input id="gname-selector" value="<%= value.gname %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Mother Name</b></div>
+                        <div class="form-outline">
+                            <input id="mname-selector" value="<%= value.mname %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>D.O.B</b></div>
+                        <div class="d-flex">
+                            <input id="dob-selector" value="<%= value.dob %>" type="date" class="d-flex d-md-nonee form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Address</b></div>
+                        <div class="">
+                            <input id="address-selector" value="<%= value.address %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Email</b></div>
+                        <div class="">
+                            <input id="mail-selector" value="<%= value.mail %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Mobile No.</b></div>
+                        <div class="">
+                            <input id="cno-selector" value="<%= value.cno %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Gender</b></div>
+                        <div>
+                            <select id="gender-selector">
+                                <option value="Male" <%=value.gender==='Male' ? 'selected' : '' %> >Male</option>
+                                <option value="Female" <%=value.gender==='Female' ? 'selected' : '' %> >Female</option>
+                                <option value="Other" <%=value.gender==='Other' ? 'selected' : '' %> >Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Differently Abled</b></div>
+                        <div>
+                            <select id="diff-abled-selector">
+                                <option value="no" <%=value.diffabl==='no' ? 'selected' : '' %>>No</option>
+                                <option value="yes" <%=value.diffabl==='yes' ? 'selected' : '' %>>Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Nationality</b></div>
+                        <div class="form-outline">
+                            <input id="nation-selector" value="<%= value.nation %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Religion</b></div>
+                        <div class="form-outline">
+                            <input id="religion-selector" value="<%= value.religion %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>Category</b></div>
+                        <div class="form-outline">
+                            <input id="category-selector" value="<%= value.category %>" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row">
+                        <div style="width: 200px;"><b>PRN no</b></div>
+                        <div class="">
+                            <div>
+                                <%= value.prn %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="my-3 " style="width:100%;" id="subject">
+            <h2>Subject Information</h2>
+            <h3>Semester IV [Regular]</h3>
+            <div class="">
+                <table style="width: 100%;">
+                    <tr>
+                        <th>Subject Name</th>
+                        <th>Subject Code</th>
+                        <th>Paper Type</th>
+
+                    </tr>
+                    <% for(let i=0; i < subjects.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= subjects[i].name %>
+                            </td>
+                            <td>
+                                <%= subjects[i].code %>
+                            </td>
+                            <td>
+                                <%= subjects[i].type %>
+                            </td>
+                        </tr>
+                        <% } %>
+
+
+                </table>
+            </div>
+
+        </div>
+        <div class="my-3">
+            <button onclick="onSubmit()" class="btn btn-success">Submit</button>
+            <button type="button" id="onsuccessave" class="btn btn-primary d-none" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                Launch demo modal
+              </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" onclick="onSaveSuccessClose()" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Your Data has been recorded successfully !
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" onclick="onSaveSuccessClose()" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+    <script>
+        function onSubmit() {
+            const payload = {
+                top: document.getElementById('top-selector').value,
+                sem: document.getElementById('sem-selector').value,
+                branch: document.getElementById('branch-selector').value,
+                nocollg: document.getElementById('nocollg-selector').value,
+                prn: '<%= value.prn %>',
+                fname: document.getElementById('fname-selector').value,
+                gname: document.getElementById('gname-selector').value,
+                mname: document.getElementById('mname-selector').value,
+                address: document.getElementById('address-selector').value,
+                mail: document.getElementById('mail-selector').value,
+                cno: document.getElementById('cno-selector').value,
+                dob: document.getElementById('dob-selector').value,
+                gender: document.getElementById('gender-selector').value,
+                category: document.getElementById('category-selector').value,
+                religion: document.getElementById('religion-selector').value,
+                diffabl: document.getElementById('diff-abled-selector').value,
+                nation: document.getElementById('nation-selector').value,
+                subjects: '<%= value.subjects %>',
+                photo: '<%= value.photo %>',
+                username: '<%= value.username %>',
+                password: '<%= value.password %>',
+                type: '<%= value.type %>'
+            }
+
+            console.log(payload);
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/');
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.response === 'OK') {
+
+                        onSaveSuccess();
+                    }
+
+                }
+            };
+            xhr.send(JSON.stringify(payload));
+        }
+
+        function onSaveSuccess() {
+            const btns = document.getElementById('onsuccessave');
+            btns.click();
+        }
+
+        function onSaveSuccessClose() {
+            window.location.href = '/logout';
+        }
+    </script>
+</body>
+
+</html>
