@@ -90,8 +90,35 @@ function updateStudent(username, value) {
 
 }
 
+function updateAdmin(value) {
+
+    return new Promise((resolve, reject) => {
+
+        db.all(`select * from stud where username="${value.oldusername}"`, (err, entries) => {
+            if (err) {
+                reject(err);
+            } else {
+                console.log('Found the old username from admin panel: ', value.oldusername);
+                if (entries.length === 0) {
+                    reject(false);
+                } else {
+
+                    db.run(`update stud set top="${value.top}", sem="${value.sem}", branch="${value.branch}", nocollg="${value.nocollg}", fname="${value.fname}", gname="${value.gname}", mname="${value.mname}", address="${value.address}", mail="${value.mail}", cno="${value.cno}", dob="${value.dob}", gender="${value.gender}", category="${value.category}", religion="${value.religion}", diffabl="${value.diffabl}", nation="${value.nation}", username="${value.username}", password="${value.password}", type="${value.type}" where username="${value.oldusername}"`, (err) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(true);
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+}
+
 function remove(prn) {
 
 }
 
-module.exports = { test, create, read, readAll, updateStudent, remove, setDB, validate };
+module.exports = { test, create, read, readAll, updateStudent, updateAdmin, remove, setDB, validate };

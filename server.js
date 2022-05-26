@@ -22,6 +22,7 @@ function auth(req, res, next) {
                     next();
                 } else if (value === 'admin') {
                     console.log('Found Admin');
+                    // next();
                     res.redirect('/panel');
                 }
             })
@@ -41,7 +42,7 @@ app.get('/', auth, (req, res) => {
             if (entries.length === 1) {
                 console.log(entries[0]);
                 const subjects = JSON.parse(require('fs').readFileSync(path.join(__dirname + entries[0].subjects)));
-                res.render(path.join('pages', 'form', 'index'), { value: entries[0], subjects: subjects.subjects });
+                res.render(path.join('pages', 'form', 'index'), { value: entries[0], subjects: subjects.subjects, editor: 'student' });
             } else {
                 res.sendStatus(501);
             }
@@ -150,6 +151,45 @@ app.get('/panel', panelAuth, (req, res) => {
             res.render(path.join('pages', 'panel', 'index'), { students, admins });
         })
         .catch((err) => { console.error(err); })
+});
+
+app.get('/form', panelAuth, (req, res) => {
+    const username = req.query.username;
+
+    if (username !== null && username.length > 0) {
+
+        handler.read(username)
+            .then((entries) => {
+                if (entries.length === 1) {
+                    console.log(entries[0]);
+                    const subjects = JSON.parse(require('fs').readFileSync(path.join(__dirname + entries[0].subjects)));
+                    res.render(path.join('pages', 'form', 'index'), { value: entries[0], subjects: subjects.subjects, editor: 'admin' });
+                } else {
+                    res.sendStatus(501);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+
+});
+
+app.post('/form', panelAuth, (req, res) => {
+    const payload = JSON.parse(req.body);
+    console.log('Received form:\n', payload);
+    handler.updateAdmin(payload)
+        .then(value => {
+            if (value === true) {
+                console.log('Data saved from Admin panel');
+                res.send('OK');
+            }
+        })
+        .catch(err => {
+            console.error(err)
+            res.sendStatus(501);
+        })
 });
 
 app.listen(3000, () => {
