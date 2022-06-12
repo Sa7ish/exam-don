@@ -42,7 +42,7 @@ app.get('/', auth, (req, res) => {
             if (entries.length === 1) {
                 console.log(entries[0]);
                 const subjects = JSON.parse(require('fs').readFileSync(path.join(__dirname + entries[0].subjects)));
-                res.render(path.join('pages', 'form', 'index'), { value: entries[0], subjects: subjects.subjects, editor: 'student' });
+                res.render(path.join('pages', 'form', 'index'), { value: entries[0], subjects: subjects.subjects, editor: 'student', sendto: '/' });
             } else {
                 res.sendStatus(501);
             }
@@ -162,8 +162,8 @@ app.get('/form', panelAuth, (req, res) => {
             .then((entries) => {
                 if (entries.length === 1) {
                     console.log(entries[0]);
-                    const subjects = JSON.parse(require('fs').readFileSync(path.join(__dirname + entries[0].subjects)));
-                    res.render(path.join('pages', 'form', 'index'), { value: entries[0], subjects: subjects.subjects, editor: 'admin' });
+                    const subjects = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'subject', '150.json')));
+                    res.render(path.join('pages', 'form', 'index'), { value: entries[0], subjects: subjects.subjects, editor: 'admin', sendto: '/form' });
                 } else {
                     res.sendStatus(501);
                 }
@@ -174,6 +174,45 @@ app.get('/form', panelAuth, (req, res) => {
     }
 
 
+});
+
+app.get('/new', panelAuth, (req, res) => {
+    const type = req.query.type;
+    if (type !== null && type.length > 0) {
+        switch (type) {
+            case "student":
+                res.render(path.join('pages', 'form', 'index'), { value: { top: null, type: 'student' }, subjects: [], editor: 'admin', sendto: '/new' });
+                break;
+            case "admin":
+                res.render(path.join('pages', 'form', 'index'), { value: { top: null, type: 'admin' }, subjects: [], editor: 'admin', sendto: '/new' });
+                break;
+            default:
+                res.sendStatus(501);
+                break;
+        }
+    } else {
+        res.sendStatus(501);
+    }
+});
+
+app.post('/new', panelAuth, (req, res) => {
+    const payload = JSON.parse(req.body);
+    if (payload !== null) {
+        console.log(payload);
+
+        handler.create(payload)
+            .then(val => {
+                if (val === 'profile saved') {
+                    res.send('OK');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            })
+
+    } else {
+        res.sendStatus(501);
+    }
 });
 
 app.post('/form', panelAuth, (req, res) => {
@@ -192,9 +231,10 @@ app.post('/form', panelAuth, (req, res) => {
         })
 });
 
-app.listen(3000, () => {
+const HTTP_PORT = 3001;
+app.listen(HTTP_PORT, () => {
     const ip = require('ip');
-    console.log(`Server running on port- http://${ip.address()}:3000`);
+    console.log(`Server running on port- http://${ip.address()}:${HTTP_PORT}`);
 })
 
 // handler.read('john').then((value) => { console.log(value) }).catch((err) => { console.error(err) });

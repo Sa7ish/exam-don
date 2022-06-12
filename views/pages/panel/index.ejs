@@ -35,10 +35,10 @@
         </div>
         <!-- Students List -->
         <div class="mb-5">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between px-1 py-3" style="background-color: rgb(50, 50, 50); color: white;">
                 <h3 class="mx-2">Students</h3>
                 <div>
-                    <button class="d-flex align-items-center btn btn-success me-3"><i class="fa fa-plus me-2"
+                    <button class="d-flex align-items-center btn btn-success me-3" onclick="window.open('/new?type=student');"><i class="fa fa-plus me-2"
                             aria-hidden="true"></i><span class="d-none d-sm-block">Add</span></button>
                 </div>
             </div>
@@ -62,9 +62,10 @@
                                 <button onclick="window.open('/form?username=<%= students[i].username %>')" class="d-flex align-items-center btn btn-primary me-3">
                                     <i class="fas fa-edit me-2"></i>
                                     <span class="d-none d-md-block">Edit</span></button>
-                                <button class="d-flex align-items-center btn btn-danger">
+                                <!-- <button class="d-flex align-items-center btn btn-danger">
                                     <i class="fa-solid fa-print me-2"></i>
-                                    <span class="d-none d-md-block">Print</span></button>
+                                    <span class="d-none d-md-block">Print</span>
+                                </button> -->
                             </td>
                         </tr>
                         <% } %>
@@ -75,10 +76,10 @@
 
         <!-- Admins List -->
         <div class="mb-5">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between px-1 py-3" style="background-color: rgb(50, 50, 50); color: white;">
                 <h3 class="mx-2">Admin</h3>
                 <div>
-                    <button class="d-flex align-items-center btn btn-success me-3"><i class="fa fa-plus me-2"
+                    <button class="d-flex align-items-center btn btn-success me-3" onclick="window.open('/new?type=admin');"><i class="fa fa-plus me-2"
                             aria-hidden="true"></i><span class="d-none d-sm-block">Add</span></button>
                 </div>
             </div>
@@ -103,10 +104,10 @@
                                     <i class="fas fa-edit me-2"></i>
                                     <span class="d-none d-md-block">Edit</span>
                                 </button>
-                                <button class="d-flex align-items-center btn btn-danger">
+                                <!-- <button class="d-flex align-items-center btn btn-danger">
                                     <i class="fa-solid fa-print me-2"></i>
                                     <span class="d-none d-md-block">Print</span>
-                                </button>
+                                </button> -->
                             </td>
                         </tr>
                         <% } %>

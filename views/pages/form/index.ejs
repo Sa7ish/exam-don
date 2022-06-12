@@ -172,7 +172,12 @@
                         <div style="width: 200px;"><b>PRN no</b></div>
                         <div class="">
                             <div>
-                                <%= value.prn %>
+                                <% if(editor === 'student'){ %>
+                                    <%= value.prn %>
+                                        <% } else if(editor === 'admin'){ %>
+                                            <input id="prnno-selector" value="<%= value.prn %>" type="text" class="form-control" />
+                                            <% } %>
+
                             </div>
                         </div>
                     </div>
@@ -273,7 +278,11 @@
                 sem: document.getElementById('sem-selector').value,
                 branch: document.getElementById('branch-selector').value,
                 nocollg: document.getElementById('nocollg-selector').value,
+                <% if(editor === 'student'){ %>
                 prn: '<%= value.prn %>',
+                <% } else if(editor === 'admin'){ %>
+                prn: document.getElementById('prnno-selector').value,
+                <% } %>
                 fname: document.getElementById('fname-selector').value,
                 gname: document.getElementById('gname-selector').value,
                 mname: document.getElementById('mname-selector').value,
@@ -288,7 +297,6 @@
                 nation: document.getElementById('nation-selector').value,
                 subjects: '<%= value.subjects %>',
                 photo: '<%= value.photo %>',
-
                 <% if (editor === 'student') {%>
                 username: '<%= value.username %>',
                 password: '<%= value.password %>',
@@ -315,11 +323,12 @@
                 }
             };
             <% } else if (editor === 'admin') {%>
-            xhr.open('POST', '/form');
+            xhr.open('POST', '<%= sendto %>');
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.response === 'OK') {
                         console.log('Data has been saved successfully');
+                        window.close();
                     }
                 }
             };
